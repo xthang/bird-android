@@ -83,3 +83,8 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+# by XT	------------------------------------------
+.DS_Store
+ignore
+.idea
