@@ -2,17 +2,65 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:x-attrs="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	tools:context=".MainActivity">
 
-	<TextView
+	<FrameLayout
+		android:id="@+id/frame"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@android:color/black">
+
+		<x.spritekit.SKView
+			android:id="@+id/skView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+	</FrameLayout>
+
+	<x.common.UIButton
+		android:id="@+id/btn_DEV"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Hello World!"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
-		app:layout_constraintTop_toTopOf="parent" />
+		android:layout_alignParentEnd="true"
+		android:layout_margin="20dp"
+		android:background="@android:color/black"
+		android:singleLine="true"
+		android:text="DEV"
+		android:textColor="@android:color/holo_green_light"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		tools:ignore="HardcodedText,TextContrastCheck,TouchTargetSizeCheck"
+		x-attrs:buttonShadowColor="@color/x_yellow" />
+
+	<!--    <com.google.android.gms.ads.AdView-->
+	<!--        android:id="@+id/adView"-->
+	<!--        android:layout_width="wrap_content"-->
+	<!--        android:layout_height="wrap_content"-->
+	<!--        android:layout_alignParentBottom="true"-->
+	<!--        android:layout_centerHorizontal="true"-->
+	<!--        ads:adSize="BANNER"-->
+	<!--        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"-->
+	<!--        ads:layout_constraintBottom_toBottomOf="parent"-->
+	<!--        ads:layout_constraintEnd_toEndOf="parent"-->
+	<!--        ads:layout_constraintHorizontal_bias="0.5"-->
+	<!--        ads:layout_constraintStart_toStartOf="parent" />-->
+
+	<FrameLayout
+		android:id="@+id/ad_view_container_top"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_centerInParent="true"
+		x-attrs:layout_constraintTop_toTopOf="parent" />
+
+	<FrameLayout
+		android:id="@+id/ad_view_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_centerInParent="true"
+		x-attrs:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

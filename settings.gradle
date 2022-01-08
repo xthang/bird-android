@@ -8,3 +8,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Bird"
 include ':app'
+
+include ':x-lib'
+project(':x-lib').projectDir = new File('../X-Library/app')

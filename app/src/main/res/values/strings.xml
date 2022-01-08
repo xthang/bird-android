@@ -1,3 +1,12 @@
 <resources>
 	<string name="app_name">Bird</string>
+
+	<string name="file_provider_authority" translatable="false">x.bird.file-provider</string>
+
+	<!-- button -->
+
+	<!-- UI -->
+	<string name="share_subject">Play %1$s with meee</string>
+	<string name="share_text">Hey you, I am playing %1$s. Play with me!</string>
+	<string name="flap_flap">Flap! Flap!</string>
 </resources>

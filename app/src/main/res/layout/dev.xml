@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<x.game.bird.DEV xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/x_black_transparent"
+	tools:context=".DEV">
+
+	<androidx.constraintlayout.widget.Guideline
+		android:id="@+id/guideline_top"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		app:layout_constraintGuide_begin="50dp" />
+
+	<androidx.constraintlayout.widget.Guideline
+		android:id="@+id/guideline"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		app:layout_constraintGuide_end="70dp" />
+
+	<x.common.ui.PopupWindow
+		android:id="@+id/window_view"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:background="@drawable/window_frame"
+		app:layout_constraintBottom_toTopOf="@+id/guideline"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHeight_max="500dp"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="@+id/guideline_top"
+		app:layout_constraintWidth_max="370dp"
+		app:layout_constraintWidth_percent="0.9">
+
+		<x.common.UIButton
+			android:id="@+id/btn_close"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginTop="15dp"
+			android:layout_marginEnd="15dp"
+			android:background="@drawable/close"
+			android:contentDescription="@string/close"
+			android:minHeight="40dp"
+			android:textAllCaps="true"
+			app:layout_constraintDimensionRatio="1"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHeight_percent="0.07"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:ignore="TouchTargetSizeCheck" />
+
+		<ScrollView
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginStart="10dp"
+			android:layout_marginTop="10dp"
+			android:layout_marginEnd="10dp"
+			android:layout_marginBottom="10dp"
+			android:padding="8dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/btn_close"
+			tools:ignore="SpeakableTextPresentCheck">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:orientation="vertical">
+
+				<Button
+					android:id="@+id/btn_reset"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_margin="7dp"
+					android:text="RESET"
+					android:textColor="@android:color/white"
+					tools:ignore="HardcodedText" />
+
+				<Button
+					android:id="@+id/btn_reset_welcome"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_margin="7dp"
+					android:text="RESET WELCOME"
+					android:textColor="@android:color/white"
+					tools:ignore="HardcodedText" />
+
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_margin="7dp"
+					android:background="@color/btn_bg"
+					android:orientation="horizontal">
+
+					<EditText
+						android:id="@+id/input_level"
+						android:layout_width="0dp"
+						android:layout_height="match_parent"
+						android:layout_margin="7dp"
+						android:layout_weight="1"
+						android:autofillHints="level"
+						android:hint="level"
+						android:inputType="number"
+						tools:ignore="HardcodedText" />
+
+					<Button
+						android:id="@+id/btn_set_level"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_margin="7dp"
+						android:layout_weight="1"
+						android:text="SET"
+						android:textColor="@android:color/white"
+						tools:ignore="HardcodedText" />
+				</LinearLayout>
+			</LinearLayout>
+		</ScrollView>
+	</x.common.ui.PopupWindow>
+
+</x.game.bird.DEV>

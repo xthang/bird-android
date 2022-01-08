@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><!--Google Play game services IDs. Save this file as res/values/games-ids.xml in your project.-->
+<resources>
+	<!--app_id-->
+	<string name="app_id" translatable="false">0</string>
+	<!--package_name-->
+	<string name="package_name" translatable="false">x.game.bird</string>
+
+	<string name="leaderboard_all_players" translatable="false">x</string>
+	<string name="medal_aluminum" translatable="false">x</string>
+	<string name="medal_bronze" translatable="false">x</string>
+	<string name="medal_silver" translatable="false">x</string>
+	<string name="medal_gold" translatable="false">x</string>
+	<string name="score_100" translatable="false">x</string>
+</resources>
