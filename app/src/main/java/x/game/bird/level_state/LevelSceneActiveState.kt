@@ -8,6 +8,10 @@ import kotlin.reflect.KClass
 
 class LevelSceneActiveState(private val levelScene: GameScene) : GKState() {
 
+	companion object {
+		private val TAG = LevelSceneActiveState::class.simpleName
+	}
+
 	private var timePassed: TimeInterval = 0.0
 
 	// The formatted string representing the time remaining.
@@ -26,7 +30,7 @@ class LevelSceneActiveState(private val levelScene: GameScene) : GKState() {
 	// MARK: GKState Life Cycle
 
 	override fun didEnterFrom(previousState: GKState?) {
-		Log.d("LevelSceneActiveState", "--  didEnter from: $previousState")
+		Log.d(TAG, "--  didEnter from: $previousState")
 		super.didEnterFrom(previousState)
 
 		if (previousState is LevelSceneFinishState) {
@@ -38,7 +42,7 @@ class LevelSceneActiveState(private val levelScene: GameScene) : GKState() {
 			levelScene.gameState = GameScene.State.STARTED
 		}
 
-		levelScene.isUserInteractionEnabled = true
+		levelScene.setUserInteraction("$TAG|didEnter", true)
 		levelScene.root.isUserInteractionEnabled = true
 		levelScene.root.speed = 1f
 		levelScene.physicsWorld.speed = 1f

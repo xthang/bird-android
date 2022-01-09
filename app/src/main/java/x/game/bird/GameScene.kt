@@ -106,10 +106,10 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 	private val skyObstacleTemp2 = SKSpriteNode(textureAtlas.textureNamed("pipe2_down"))
 
 	// Physics
-	private val birdCategory: Long = 0x00000001
-	private val groundCategory: Long = 0x00000010
-	private val pipeCategory: Long = 0x00000100
-	private val scoreCategory: Long = 0x00001000
+	private val birdCategory = 1
+	private val groundCategory = 1 shl 1
+	private val pipeCategory = 1 shl 2
+	private val scoreCategory = 1 shl 3
 
 	// Actions
 	private lateinit var movePipesAndRemove: SKAction
@@ -168,7 +168,6 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 	}
 
 	override fun didChangeSize(tag: String, oldSize: Size) {
-		Log.i(TAG, "--  didChangeSize [$tag]: $oldSize -> $size")
 		super.didChangeSize(tag, oldSize)
 
 		if (sceneLoaded) {
@@ -236,6 +235,7 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 		root.addChild(flash)
 
 		// Bird
+		mainCharacter.name = "bird"
 		mainCharacter.zPosition = GameLayer.mainCharacter.rawValue
 		val mainCharTextureAtlas = "bird${(0..2).random()}"
 		val mainCharTextures = arrayOf(0, 1, 2).map { mainCharTextureAtlas + "_" + it }
@@ -276,9 +276,13 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 		tutorial.zPosition = GameLayer.tutorial.rawValue
 		root.addChild(tutorial)
 
+		groundObstacleTemp1.name = "ground-pipe-1"
 		groundObstacleTemp1.texture!!.filteringMode = SKTextureFilteringMode.nearest
+		groundObstacleTemp2.name = "ground-pipe-2"
 		groundObstacleTemp2.texture!!.filteringMode = SKTextureFilteringMode.nearest
+		skyObstacleTemp1.name = "sky-pipe-1"
 		skyObstacleTemp1.texture!!.filteringMode = SKTextureFilteringMode.nearest
+		skyObstacleTemp2.name = "sky-pipe-2"
 		skyObstacleTemp2.texture!!.filteringMode = SKTextureFilteringMode.nearest
 	}
 
@@ -419,16 +423,12 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 
 		// Pipes
 		val groundPipeTexture1Size = groundObstacleTemp1.texture!!.size()
-		groundObstacleTemp1.name = "ground-pipe-1"
 		groundObstacleTemp1.size = Size(PIPE_WIDTH, PIPE_WIDTH * groundPipeTexture1Size.height / groundPipeTexture1Size.width)
 		val groundPipeTexture2Size = groundObstacleTemp2.texture!!.size()
-		groundObstacleTemp2.name = "ground-pipe-2"
 		groundObstacleTemp2.size = Size(PIPE_WIDTH, PIPE_WIDTH * groundPipeTexture2Size.height / groundPipeTexture2Size.width)
 		val skyPipeTexture1Size = skyObstacleTemp1.texture!!.size()
-		skyObstacleTemp1.name = "sky-pipe-1"
 		skyObstacleTemp1.size = Size(PIPE_WIDTH, PIPE_WIDTH * skyPipeTexture1Size.height / skyPipeTexture1Size.width)
 		val skyPipeTexture2Size = skyObstacleTemp2.texture!!.size()
-		skyObstacleTemp2.name = "sky-pipe-2"
 		skyObstacleTemp2.size = Size(PIPE_WIDTH, PIPE_WIDTH * skyPipeTexture2Size.height / skyPipeTexture2Size.width)
 
 		val spawnThenDelayForever = SKAction.repeatForever(
@@ -617,7 +617,8 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 		Log.i(TAG, "--  endGame [$tag]")
 
 		gameState = State.ENDED
-		setUserInteraction(false)
+		setUserInteraction("endGame|$tag", false)
+		root.isUserInteractionEnabled = false
 
 		vibrate(Vibration.Effect1)
 		playSound(hitSound)

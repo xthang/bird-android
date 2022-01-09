@@ -251,7 +251,7 @@ class GameFinishScene(val context: Context) : SceneOverlay() {
 	}
 
 	private fun runScore() {
-		var sequence: ArrayList<SKAction> = arrayListOf(SKAction.wait(0.5))
+		val sequence: ArrayList<SKAction> = arrayListOf(SKAction.wait(0.5))
 		for (s in 0..score) {
 			sequence.add(SKAction.run { this.loadingScore = s })
 			sequence.add(SKAction.wait(0.1))

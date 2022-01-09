@@ -53,11 +53,10 @@ class HomeScene(context: Context) : BaseScene(context) {
 	init {
 		sceneDidLoad("")
 
-		setUserInteraction(true)
+		setUserInteraction("", true)
 	}
 
 	override fun sceneDidLoad(tag: String) {
-		Log.i(TAG, "--  sceneDidLoad: ${hashCode()}")
 		super.sceneDidLoad(tag)
 
 		scaleMode = SKSceneScaleMode.resizeFill
@@ -82,7 +81,6 @@ class HomeScene(context: Context) : BaseScene(context) {
 	}
 
 	override fun didChangeSize(tag: String, oldSize: Size) {
-		Log.i(TAG, "--  didChangeSize [$tag]: $oldSize -> $size")
 		super.didChangeSize(tag, oldSize)
 
 		if (sceneLoaded) {
