@@ -26,8 +26,8 @@ abstract class LevelSceneOverlayState(protected val levelScene: GameScene) : GKS
 		Log.d(TAG, "--  didEnter from: $previousState")
 		super.didEnterFrom(previousState)
 
+		// levelScene.root.isUserInteractionEnabled = false
 		levelScene.root.speed = 0f
-		levelScene.root.isUserInteractionEnabled = false
 		levelScene.physicsWorld.speed = 0f
 
 		levelScene.show(overlay)

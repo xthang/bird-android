@@ -1,7 +1,7 @@
 <resources>
-	<string name="app_name">Bird</string>
+	<string name="app_name">Flappy Bird</string>
 
-	<string name="file_provider_authority" translatable="false">x.bird.file-provider</string>
+	<string name="file_provider_authority" translatable="false">x.game.bird.file-provider</string>
 
 	<!-- button -->
 

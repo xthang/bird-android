@@ -2,6 +2,7 @@ package x.game.bird
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
@@ -97,7 +98,7 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 	private var movingObjects = SKNode()
 	private var movingObstacles = SKNode()
 
-	private var flash = SKSpriteNode()
+	private var flash = SKSpriteNode(Color.WHITE, Size.zero)
 
 	// Node templates
 	private val groundObstacleTemp1 = SKSpriteNode(textureAtlas.textureNamed("pipe_up"))
@@ -144,10 +145,8 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 		super.didMoveTo(tag, view)
 
 		val viewSizeAspect = view.height.toFloat() / view.width
-		scaleMode = if (1.3 < viewSizeAspect && viewSizeAspect < 2.2) {
-			SKSceneScaleMode.resizeFill
-		} else {
-			SKSceneScaleMode.aspectFit
+		if (1.3 < viewSizeAspect && viewSizeAspect < 2.2) {
+			scaleMode = SKSceneScaleMode.resizeFill
 		}
 
 		scaleMode = SKSceneScaleMode.aspectFit
@@ -365,7 +364,7 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 		val resetBg = SKAction.moveBy(bgWidth, 0f, 0.0)
 		val moveBgsForever = SKAction.repeatForever(SKAction.sequence(moveBg, resetBg))
 
-		for (i in 0..1 + (this.frame.width / (bgTexture.size().width * 2)).toInt()) {
+		for (i in 0..1 + (this.frame.width / bgWidth).toInt()) {
 			val node = SKSpriteNode(bgTexture)
 
 			node.size = Size(bgWidth + 1, bgHeight)
@@ -395,16 +394,16 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 		val resetGround = SKAction.moveBy(groundWidth, 0f, 0.0)
 		val moveGroundsForever = SKAction.repeatForever(SKAction.sequence(moveGround, resetGround))
 
-		for (i in 0..1 + (this.frame.height / groundWidth).toInt()) {
+		for (i in 0..1 + (this.frame.width / groundWidth).toInt()) {
 			val ground = SKSpriteNode(groundTexture)
-			ground.name = "ground"
+			ground.name = "ground-$i"
 			ground.size = Size(groundWidth + 1, groundHeight)
 			ground.position = Point(i * groundWidth, -frame.height / 2 - groundHeight / 2 + GROUND_HEIGHT_ON_DISPLAY)
 
 			ground.physicsBody = SKPhysicsBody(ground.size)
 			ground.physicsBody!!.isDynamic = false
 			ground.physicsBody!!.categoryBitMask = groundCategory
-			//ground.physicsBody!!.collisionBitMask = collisionCategory
+			ground.physicsBody!!.collisionBitMask = 0 // todo: ios does not need this
 			//ground.physicsBody!!.contactTestBitMask = collisionCategory
 
 			ground.run(moveGroundsForever)
@@ -419,6 +418,7 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 		sky.physicsBody = SKPhysicsBody(Size(frame.width, 1f))
 		sky.physicsBody!!.isDynamic = false
 		sky.physicsBody!!.categoryBitMask = pipeCategory
+		sky.physicsBody!!.collisionBitMask = 0 // todo: ios does not need this
 		addChild(sky)
 
 		// Pipes
@@ -475,7 +475,10 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 		// updateScene("resizeScene|\(tag)")
 	}
 
+	private var pipeNo = 0
 	private fun spawnObstacles(tag: String) {
+		pipeNo++
+
 		val pipePair = SKNode()
 		pipePair.position = Point((frame.width + PIPE_WIDTH) / 2, 0f)
 		pipePair.zPosition = GameLayer.ObjectLayer.obstacle.rawValue
@@ -484,29 +487,34 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 		val y: Float = Random.nextDouble(-height, height).toFloat()
 
 		val pipeDown = skyObstacleTemp1.clone()
+		pipeDown.name = "pipe-down-$pipeNo"
 		pipeDown.position = Point(0f, (GROUND_HEIGHT_ON_DISPLAY + VERTICAL_PIPE_GAP + pipeDown.size.height) / 2 + y)
 
 		pipeDown.physicsBody = SKPhysicsBody(pipeDown.size)
 		pipeDown.physicsBody!!.isDynamic = false
 		pipeDown.physicsBody!!.categoryBitMask = pipeCategory
+		pipeDown.physicsBody!!.collisionBitMask = 0 // todo: ios does not need this
 		pipeDown.physicsBody!!.contactTestBitMask = birdCategory
 		pipePair.addChild(pipeDown)
 
 		val pipeUp = groundObstacleTemp1.clone()
+		pipeUp.name = "pipe-up-$pipeNo"
 		pipeUp.position = Point(0f, (GROUND_HEIGHT_ON_DISPLAY - VERTICAL_PIPE_GAP - pipeUp.size.height) / 2 + y)
 
 		pipeUp.physicsBody = SKPhysicsBody(pipeUp.size)
 		pipeUp.physicsBody!!.isDynamic = false
 		pipeUp.physicsBody!!.categoryBitMask = pipeCategory
+		pipeUp.physicsBody!!.collisionBitMask = 0 // todo: ios does not need this
 		pipeUp.physicsBody!!.contactTestBitMask = birdCategory
 		pipePair.addChild(pipeUp)
 
 		val contactNode = SKNode()
-		contactNode.name = "score"
+		contactNode.name = "score-$pipeNo"
 		contactNode.position = Point(pipeDown.size.width * 0.5f, this.frame.midY)
 		contactNode.physicsBody = SKPhysicsBody(Size(1f, this.frame.height))
 		contactNode.physicsBody!!.isDynamic = false
 		contactNode.physicsBody!!.categoryBitMask = scoreCategory
+		contactNode.physicsBody!!.collisionBitMask = 0 // todo: ios does not need this
 		contactNode.physicsBody!!.contactTestBitMask = birdCategory
 		pipePair.addChild(contactNode)
 
@@ -567,8 +575,8 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 	}
 
 	private fun processInput(tag: String) {
-		if (!root.isUserInteractionEnabled) {
-			Log.i(TAG, "!-  processInput: ${root.isUserInteractionEnabled}")
+		if (!isUserInteractionEnabled) {
+			Log.i(TAG, "!-  processInput: ${isUserInteractionEnabled}")
 			return
 		}
 
@@ -579,7 +587,7 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 		}
 
 		if (gameState == State.STARTED) {
-			mainCharacter.physicsBody!!.velocity = Vector(0, 0)
+			mainCharacter.physicsBody!!.velocity = Vector.zero
 			mainCharacter.physicsBody!!.applyImpulse(Vector(0f, mainCharacter.physicsBody!!.mass * MAIN_CHARACTER_HEIGHT * 17))
 			flapSound.stop()
 			playSound(flapSound)
@@ -659,8 +667,8 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 			this.root.speed = 0f
 			this.scoreLabel.isHidden = true
 
-			GameCenterHelper.getInstance().reportAchievement(TAG, "game_$gameNo")
-			GameCenterHelper.getInstance().reportAchievement(TAG, "score_$score")
+			// GameCenterHelper.getInstance().reportAchievement(TAG, "game_$gameNo")
+			// GameCenterHelper.getInstance().reportAchievement(TAG, "score_$score")
 			val isSummitedToGC = GameCenterHelper.getInstance().submitScore(TAG, this.score)
 			saveScoreLocally(this.score, isSummitedToGC)
 

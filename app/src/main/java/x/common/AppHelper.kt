@@ -9,7 +9,7 @@ import java.util.*
 
 class AppHelper : Helper.IHelper {
 	companion object {
-		private val TAG = "~☸"
+		private const val TAG = "~☸"
 
 		private lateinit var applicationContext: Application
 

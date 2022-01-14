@@ -172,7 +172,7 @@ class HomeScene(context: Context) : BaseScene(context) {
 		val resetBg = SKAction.moveBy(bgWidth, 0f, 0.0)
 		val moveBgsForever = SKAction.repeatForever(SKAction.sequence(moveBg, resetBg))
 
-		for (i in 0..1 + (frame.width / (bgTexture.size().width * 2)).toInt()) {
+		for (i in 0..1 + (frame.width / bgWidth).toInt()) {
 			val node = SKSpriteNode(bgTexture)
 
 			node.size = Size(bgWidth + 1, bgHeight)
@@ -200,7 +200,7 @@ class HomeScene(context: Context) : BaseScene(context) {
 		val resetGround = SKAction.moveBy(groundWidth, 0f, 0.0)
 		val moveGroundsForever = SKAction.repeatForever(SKAction.sequence(moveGround, resetGround))
 
-		for (i in 0..1 + (frame.height / groundWidth).toInt()) {
+		for (i in 0..1 + (frame.width / groundWidth).toInt()) {
 			val ground = SKSpriteNode(groundTexture)
 			ground.name = "ground"
 			ground.size = Size(groundWidth + 1, groundHeight)

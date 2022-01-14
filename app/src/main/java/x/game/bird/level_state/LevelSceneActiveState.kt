@@ -43,7 +43,7 @@ class LevelSceneActiveState(private val levelScene: GameScene) : GKState() {
 		}
 
 		levelScene.setUserInteraction("$TAG|didEnter", true)
-		levelScene.root.isUserInteractionEnabled = true
+		// levelScene.root.isUserInteractionEnabled = true
 		levelScene.root.speed = 1f
 		levelScene.physicsWorld.speed = 1f
 	}

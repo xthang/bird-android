@@ -108,13 +108,13 @@ class MainActivity : ComponentActivity(), GameCenterHelper.GameCenterDelegate {
 		val skView = binding.skView
 		skView.scene = HomeScene(this)
 
-		skView.showsFPS = true
-		skView.showsDrawCount = true
-		skView.showsNodeCount = true
-		skView.showsQuadCount = true
-		skView.showsPhysics = true
-		skView.showsFields = true
-		skView.showsLargeContentViewer = true
+		//skView.showsFPS = true
+		//skView.showsDrawCount = true
+		//skView.showsNodeCount = true
+		//skView.showsQuadCount = true
+		//skView.showsPhysics = true
+		//skView.showsFields = true
+		//skView.showsLargeContentViewer = true
 
 		// ADS
 		adBanner = AdBanner(this)

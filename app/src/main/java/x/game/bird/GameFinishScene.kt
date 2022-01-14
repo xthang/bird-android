@@ -1,7 +1,7 @@
 package x.game.bird
 
 import android.content.Context
-import android.util.Log
+import androidx.annotation.StringRes
 import androidx.preference.PreferenceManager
 import x.common.ButtonNode
 import x.common.CommonConfig
@@ -142,22 +142,22 @@ class GameFinishScene(val context: Context) : SceneOverlay() {
 		isNewBest = best < newBestScore
 		bestScoreLabel.text = "$best"
 
-		val achievement: String?
+		@StringRes val achievement: Int?
 
 		if (score >= 100) {
-			achievement = "medal_gold"
+			achievement = R.string.achievement_gold_medal
 			medal.texture = textureAtlas.textureNamed("medal_gold")
 			isNewMedal = best < 100
 		} else if (score >= 40) {
-			achievement = "medal_silver"
+			achievement = R.string.achievement_silver_medal
 			medal.texture = textureAtlas.textureNamed("medal_silver")
 			isNewMedal = best < 40
 		} else if (score >= 20) {
-			achievement = "medal_bronze"
+			achievement = R.string.achievement_bronze_medal
 			medal.texture = textureAtlas.textureNamed("medal_bronze")
 			isNewMedal = best < 20
 		} else if (score >= 10) {
-			achievement = "medal_aluminum"
+			achievement = R.string.achievement_aluminum_medal
 			medal.texture = textureAtlas.textureNamed("medal_aluminum")
 			isNewMedal = best < 10
 		} else {
