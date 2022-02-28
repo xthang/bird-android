@@ -15,8 +15,8 @@ class GamePauseScene(context: Context) : SceneOverlay() {
 
 	private val textureAtlas = SKTextureAtlas(context, R.drawable.atlas)
 
-	private var buttons = SKNode()
-	private var btnResume = ButtonNode(R.id.btn_resume, "btn_resume", textureAtlas.textureNamed("button_resume"))
+	private val buttons = SKNode()
+	private val btnResume = ButtonNode(R.id.btn_resume, "btn_resume", textureAtlas.textureNamed("button_resume"))
 
 
 	init {

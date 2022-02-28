@@ -38,20 +38,20 @@ class GameFinishScene(val context: Context) : SceneOverlay() {
 	private val textureAtlas = SKTextureAtlas(context, R.drawable.atlas)
 
 	// Nodes
-	private var gameOverText = SKSpriteNode(textureAtlas.textureNamed("text_game_over"))
-	private var scorePanel = SKSpriteNode(textureAtlas.textureNamed("score_panel"))
+	private val gameOverText = SKSpriteNode(textureAtlas.textureNamed("text_game_over"))
+	private val scorePanel = SKSpriteNode(textureAtlas.textureNamed("score_panel"))
 
-	private var scoreLabel = SKLabelNode2()
-	private var bestScoreLabel = SKLabelNode2()
-	private var newLabel = SKSpriteNode(textureAtlas.textureNamed("new"))
-	private var medal = SKSpriteNode()
-	private var twinkles = SKNode()
+	private val scoreLabel = SKLabelNode2()
+	private val bestScoreLabel = SKLabelNode2()
+	private val newLabel = SKSpriteNode(textureAtlas.textureNamed("new"))
+	private val medal = SKSpriteNode()
+	private val twinkles = SKNode()
 
-	private var buttons = SKNode()
-	private var btnNewGame = ButtonNode(R.id.btn_play, "btn_play", textureAtlas.textureNamed("button_play"))
-	private var btnLeaderboards = ButtonNode(R.id.btn_leaderboards, "btn_leaderboards", textureAtlas.textureNamed("button_score"))
-	private var btnHome = ButtonNode(R.id.btn_home, "btn_home", textureAtlas.textureNamed("button_ok"))
-	private var btnShare = ButtonNode(R.id.btn_share, "btn_share", textureAtlas.textureNamed("button_share"))
+	private val buttons = SKNode()
+	private val btnNewGame = ButtonNode(R.id.btn_play, "btn_play", textureAtlas.textureNamed("button_play"))
+	private val btnLeaderboards = ButtonNode(R.id.btn_leaderboards, "btn_leaderboards", textureAtlas.textureNamed("button_score"))
+	private val btnHome = ButtonNode(R.id.btn_home, "btn_home", textureAtlas.textureNamed("button_ok"))
+	private val btnShare = ButtonNode(R.id.btn_share, "btn_share", textureAtlas.textureNamed("button_share"))
 
 	private val swooshSound = SKAudioNode(context, R.raw.sfx_swooshing)
 
@@ -168,7 +168,7 @@ class GameFinishScene(val context: Context) : SceneOverlay() {
 		medal.texture?.filteringMode = SKTextureFilteringMode.nearest
 
 		if (achievement != null) {
-			GameCenterHelper.getInstance().reportAchievement(TAG, achievement)
+			GameCenterHelper.instance.reportAchievement(TAG, achievement)
 		}
 	}
 

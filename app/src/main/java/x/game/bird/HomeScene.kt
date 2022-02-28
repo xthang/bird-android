@@ -31,6 +31,8 @@ class HomeScene(context: Context) : BaseScene(context) {
 
 	private var root = SKNode()
 
+	private val movingObjects = SKNode()
+
 	private var banner = SKNode()
 	private var title = SKSpriteNode(textureAtlas.textureNamed("title"))
 	private var mainCharacter = SKSpriteNode()
@@ -91,13 +93,17 @@ class HomeScene(context: Context) : BaseScene(context) {
 	private fun initObjects(tag: String) {
 		addChild(root)
 
+		// MovingObjects
+		movingObjects.zPosition = GameLayer.objects.rawValue
+		root.addChild(movingObjects)
+
 		val background = SKNode()
 		background.name = "background"
-		root.addChild(background)
+		movingObjects.addChild(background)
 
 		val ground = SKNode()
 		ground.name = "ground"
-		root.addChild(ground)
+		movingObjects.addChild(ground)
 
 		banner.zPosition = GameLayer.mainCharacter.rawValue
 		root.addChild(banner)
@@ -157,7 +163,7 @@ class HomeScene(context: Context) : BaseScene(context) {
 		val BG_VELOCITY = MAIN_CHARACTER_WIDTH * 0.2f
 
 		// background
-		val background = root.childNode("background")!!
+		val background = movingObjects.childNode("background")!!
 		background.removeAllChildren()
 		background.zPosition = GameLayer.ObjectLayer.sky.rawValue
 
@@ -184,7 +190,7 @@ class HomeScene(context: Context) : BaseScene(context) {
 		}
 
 		// ground
-		val grounds = root.childNode("ground")!!
+		val grounds = movingObjects.childNode("ground")!!
 		grounds.zPosition = GameLayer.ObjectLayer.ground.rawValue
 		grounds.removeAllChildren()
 

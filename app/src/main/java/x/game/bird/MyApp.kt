@@ -30,9 +30,9 @@ class MyApp : BaseApp() {
 		AppHelper.init(this)
 		Helper.appHelper = AppHelper()
 
-		super.onCreate()
-
 		AppDatabase.init(this)
+
+		super.onCreate()
 
 		// update app data on new version update
 		val appVersion = Helper.appLongVersion
@@ -43,7 +43,7 @@ class MyApp : BaseApp() {
 			Helper.updatePreference(TAG, CommonConfig.Keys.appDataVersion, appVersion)
 		}
 
-		GameCenterHelper.getInstance(this).apply {
+		GameCenterHelper.instance.apply {
 			this.onGoogleConnected = {
 				// if local best score is not submitted to GC then submit
 				runBlocking {

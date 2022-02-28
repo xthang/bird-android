@@ -86,19 +86,19 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 	private var BG_VELOCITY by Delegates.notNull<Float>()
 
 	// Nodes
-	var root = SKNode()
-	private var navigation = SKNode()
+	val root = SKNode()
+	private val navigation = SKNode()
 	// lazy var timerNode = root.childNode(withName: "Time") as! SKLabelNode
 
-	private var scoreLabel = SKLabelNode2()
-	private var tutorial = SKSpriteNode()
+	private val scoreLabel = SKLabelNode2()
+	private val tutorial = SKSpriteNode()
 
-	private var mainCharacter = SKSpriteNode()
+	private val mainCharacter = SKSpriteNode()
 
-	private var movingObjects = SKNode()
-	private var movingObstacles = SKNode()
+	private val movingObjects = SKNode()
+	private val movingObstacles = SKNode()
 
-	private var flash = SKSpriteNode(Color.WHITE, Size.zero)
+	private val flash = SKSpriteNode(Color.WHITE, Size.zero)
 
 	// Node templates
 	private val groundObstacleTemp1 = SKSpriteNode(textureAtlas.textureNamed("pipe_up"))
@@ -213,7 +213,7 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 
 		addChild(root)
 
-		// Pipes
+		// MovingObjects
 		movingObjects.zPosition = GameLayer.objects.rawValue
 		root.addChild(movingObjects)
 
@@ -667,9 +667,9 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 			this.root.speed = 0f
 			this.scoreLabel.isHidden = true
 
-			// GameCenterHelper.getInstance().reportAchievement(TAG, "game_$gameNo")
-			// GameCenterHelper.getInstance().reportAchievement(TAG, "score_$score")
-			val isSummitedToGC = GameCenterHelper.getInstance().submitScore(TAG, this.score)
+			// GameCenterHelper.instance.reportAchievement(TAG, "game_$gameNo")
+			// GameCenterHelper.instance.reportAchievement(TAG, "score_$score")
+			val isSummitedToGC = GameCenterHelper.instance.submitScore(TAG, this.score)
 			saveScoreLocally(this.score, isSummitedToGC)
 
 			this.stateMachine.enter(LevelSceneFinishState::class)
@@ -686,7 +686,7 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 
 	private fun saveScoreLocally(score: Int, isSummitedToGC: Boolean) {
 		val s = Score(score)
-		val gameCenterHelper = GameCenterHelper.getInstance()
+		val gameCenterHelper = GameCenterHelper.instance
 		s.accountId = gameCenterHelper.getLastSignedInAccount()?.id
 		s.accountName = gameCenterHelper.getLastSignedInAccount()?.displayName
 		s.playerId = gameCenterHelper.mCurrentPlayer?.playerId

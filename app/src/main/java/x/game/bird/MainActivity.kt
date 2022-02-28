@@ -106,15 +106,17 @@ class MainActivity : ComponentActivity(), GameCenterHelper.GameCenterDelegate {
 		setContentView(binding.root)
 
 		val skView = binding.skView
-		skView.scene = HomeScene(this)
+		if (BuildConfig.DEBUG) {
+			//skView.showsFPS = true
+			//skView.showsDrawCount = true
+			//skView.showsNodeCount = true
+			//skView.showsQuadCount = true
+			//skView.showsPhysics = true
+			//skView.showsFields = true
+			//skView.showsLargeContentViewer = true
+		}
 
-		//skView.showsFPS = true
-		//skView.showsDrawCount = true
-		//skView.showsNodeCount = true
-		//skView.showsQuadCount = true
-		//skView.showsPhysics = true
-		//skView.showsFields = true
-		//skView.showsLargeContentViewer = true
+		skView.scene = HomeScene(this)
 
 		// ADS
 		adBanner = AdBanner(this)
@@ -131,7 +133,7 @@ class MainActivity : ComponentActivity(), GameCenterHelper.GameCenterDelegate {
 			}
 		})
 
-		GameCenterHelper.getInstance(null).delegate = this
+		GameCenterHelper.instance.delegate = this
 
 		LocalBroadcastManager.getInstance(this).apply {
 			registerReceiver(object : BroadcastReceiver() {
@@ -209,7 +211,7 @@ class MainActivity : ComponentActivity(), GameCenterHelper.GameCenterDelegate {
 				alert.addAction(getString(R.string.lets_play), style = ButtonStyle.primary1) {
 					isNewUpdate = false
 
-					GameCenterHelper.getInstance(null).signInSilently("$TAG|onCreate|welcome")
+					GameCenterHelper.instance.signInSilently("$TAG|onCreate|welcome")
 				}
 				binding.root.addView(alert)
 				return
@@ -236,7 +238,7 @@ class MainActivity : ComponentActivity(), GameCenterHelper.GameCenterDelegate {
 			// Since the state of the signed in user can change when the activity is not active
 			// it is recommended to try and sign in silently from when the app resumes.
 			if (!isResumedFromLoginIntent) {
-				GameCenterHelper.getInstance(null).signInSilently("$TAG|onResume")
+				GameCenterHelper.instance.signInSilently("$TAG|onResume")
 			}
 			isResumedFromLoginIntent = false
 		}
@@ -302,7 +304,7 @@ class MainActivity : ComponentActivity(), GameCenterHelper.GameCenterDelegate {
 		val googleFirstSignIn = sharedPreferences.getBoolean(CommonConfig.Keys.googleSignIn, false)
 
 		if (!googleFirstSignIn) {
-			GameCenterHelper.getInstance(null).startSignInIntent(this)
+			GameCenterHelper.instance.startSignInIntent(this)
 			sharedPreferences.edit().putBoolean(CommonConfig.Keys.googleSignIn, true).apply()
 		}
 	}
@@ -320,7 +322,7 @@ class MainActivity : ComponentActivity(), GameCenterHelper.GameCenterDelegate {
 			val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data!!)
 			if (result!!.isSuccess) {
 				// The signed in account is stored in the result.
-				GameCenterHelper.getInstance(null).onGoogleConnected(result.signInAccount!!)
+				GameCenterHelper.instance.onGoogleConnected(result.signInAccount!!)
 			} else {
 				var message = result.status.statusMessage
 				Log.w(
@@ -330,7 +332,7 @@ class MainActivity : ComponentActivity(), GameCenterHelper.GameCenterDelegate {
 				if (message == null || message.isEmpty()) {
 					message = getString(R.string.signin_other_error)
 				}
-				GameCenterHelper.getInstance(null).onDisconnected()
+				GameCenterHelper.instance.onDisconnected()
 				Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 			}
 		} else if (requestCode == GameCenterHelper.RC_LEADERBOARD_UI) {

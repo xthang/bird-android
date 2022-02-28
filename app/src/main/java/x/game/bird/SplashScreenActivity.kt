@@ -7,7 +7,6 @@ import android.os.Handler
 import android.os.Looper
 import androidx.preference.PreferenceManager
 import x.common.CommonConfig
-import x.game.bird.MainActivity
 
 
 class SplashScreenActivity : Activity() {

@@ -16,7 +16,7 @@ open class BaseScene(context: Context) : BaseSKScene(context), ButtonResponder {
 		private val TAG = BaseScene::class.simpleName!!
 	}
 
-	override fun buttonPressed(button: IButton) {
+	override fun buttonTriggered(button: IButton) {
 		when (button.buttonIdentifier) {
 			ButtonIdentifier.Close -> {
 			}
