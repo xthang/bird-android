@@ -1,9 +1,10 @@
-package x.game.bird
+package x.game.bird.scene
 
 import android.content.Context
 import x.common.ButtonNode
 import x.common.sprite.SceneOverlay
 import x.core.graphics.Size
+import x.game.bird.R
 import x.spritekit.*
 import kotlin.math.min
 

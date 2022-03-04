@@ -16,7 +16,7 @@ class SplashScreenActivity : Activity() {
 
 		setContentView(R.layout.activity_splash)
 		Handler(Looper.getMainLooper()).postDelayed({
-			if (PreferenceManager.getDefaultSharedPreferences(this).getLong(CommonConfig.Keys.welcomeVersion, -1L) == -1L)
+			if (PreferenceManager.getDefaultSharedPreferences(this).getLong(CommonConfig.Keys.newAppUpdateNotiVersion, -1L) == -1L)
 				startActivity(Intent(this, WelcomeActivity::class.java))
 			else
 				startActivity(Intent(this, MainActivity::class.java))

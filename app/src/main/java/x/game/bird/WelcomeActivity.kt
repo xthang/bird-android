@@ -21,7 +21,7 @@ import x.game.bird.MainActivity
 class WelcomeActivity : ComponentActivity() {
 
 	companion object {
-		val TAG = WelcomeActivity::class.simpleName!!
+		private val TAG = WelcomeActivity::class.simpleName!!
 	}
 
 	private lateinit var mLayouts: Array<ViewGroup>
@@ -97,7 +97,7 @@ class WelcomeActivity : ComponentActivity() {
 		intent.putExtra("startingActivity", WelcomeActivity::class.simpleName)
 		startActivity(intent)
 		finish()
-		Helper.updatePreference(TAG, CommonConfig.Keys.welcomeVersion, Helper.appLongVersion)
+		// Helper.updatePreference(TAG, CommonConfig.Keys.welcomeVersion, Helper.appLongVersion)
 	}
 
 	inner class IntroViewPagerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -1,4 +1,4 @@
-package x.game.bird
+package x.game.bird.scene
 
 import android.content.Context
 import android.content.Intent
@@ -19,6 +19,7 @@ import x.core.graphics.Point
 import x.core.graphics.SKSceneScaleMode
 import x.core.graphics.Size
 import x.core.graphics.Vector
+import x.game.bird.R
 import x.game.bird.level_state.LevelSceneActiveState
 import x.game.bird.level_state.LevelSceneFinishState
 import x.game.bird.level_state.LevelScenePauseState
@@ -296,7 +297,7 @@ class GameScene(context: Context) : BaseScene(context), ButtonResponder, SKPhysi
 		sounds.forEach {
 			it.autoplayLooped = false
 			it.soundVol = vol
-			addChild(it)
+			root.addChild(it)
 		}
 	}
 

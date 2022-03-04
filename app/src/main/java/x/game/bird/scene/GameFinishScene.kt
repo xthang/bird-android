@@ -1,4 +1,4 @@
-package x.game.bird
+package x.game.bird.scene
 
 import android.content.Context
 import androidx.annotation.StringRes
@@ -12,6 +12,8 @@ import x.common.sprite.BaseSKScene
 import x.common.sprite.SceneOverlay
 import x.core.graphics.Point
 import x.core.graphics.Size
+import x.game.bird.MainActivity
+import x.game.bird.R
 import x.spritekit.*
 import kotlin.math.*
 import kotlin.properties.Delegates

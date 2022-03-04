@@ -2,7 +2,6 @@ package x.game.bird
 
 import android.util.Log
 import kotlinx.coroutines.runBlocking
-import x.common.AppHelper
 import x.common.BaseApp
 import x.common.CommonConfig
 import x.common.Helper
@@ -27,8 +26,8 @@ class MyApp : BaseApp() {
 	override fun onCreate() {
 		Log.i(TAG, "--  onCreate")
 
-		AppHelper.init(this)
-		Helper.appHelper = AppHelper()
+		// AppHelper.init(this)
+		// Helper.appHelper = AppHelper()
 
 		AppDatabase.init(this)
 

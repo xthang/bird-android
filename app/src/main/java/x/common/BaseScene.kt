@@ -5,9 +5,9 @@ import x.common.sprite.BaseSKScene
 import x.common.ui.ButtonIdentifier
 import x.common.ui.ButtonResponder
 import x.common.ui.IButton
-import x.game.bird.GameScene
-import x.game.bird.HomeScene
 import x.game.bird.R
+import x.game.bird.scene.GameScene
+import x.game.bird.scene.HomeScene
 
 
 open class BaseScene(context: Context) : BaseSKScene(context), ButtonResponder {
@@ -22,10 +22,10 @@ open class BaseScene(context: Context) : BaseSKScene(context), ButtonResponder {
 			}
 			ButtonIdentifier.Play,
 			ButtonIdentifier.NewGame -> {
-				view!!.scene = GameScene(context)
+				view!!.presentScene("$TAG|buttonTriggered", GameScene(context))
 			}
 			ButtonIdentifier.Home -> {
-				view!!.scene = HomeScene(context)
+				view!!.presentScene("$TAG|buttonTriggered", HomeScene(context))
 			}
 			ButtonIdentifier.Pause -> {
 				pause(button.buttonIdentifier.toString())

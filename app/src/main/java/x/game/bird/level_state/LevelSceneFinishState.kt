@@ -1,7 +1,7 @@
 package x.game.bird.level_state
 
-import x.game.bird.GameFinishScene
-import x.game.bird.GameScene
+import x.game.bird.scene.GameFinishScene
+import x.game.bird.scene.GameScene
 import x.spritekit.GKState
 import kotlin.reflect.KClass
 

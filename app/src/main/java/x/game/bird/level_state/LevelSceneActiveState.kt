@@ -2,7 +2,7 @@ package x.game.bird.level_state
 
 import android.util.Log
 import x.common.TimeInterval
-import x.game.bird.GameScene
+import x.game.bird.scene.GameScene
 import x.spritekit.GKState
 import kotlin.reflect.KClass
 

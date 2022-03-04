@@ -1,4 +1,4 @@
-package x.game.bird
+package x.game.bird.scene
 
 import android.content.Context
 import android.content.Intent
@@ -12,6 +12,7 @@ import x.common.Notification
 import x.core.graphics.Point
 import x.core.graphics.SKSceneScaleMode
 import x.core.graphics.Size
+import x.game.bird.R
 import x.spritekit.*
 import kotlin.math.max
 import kotlin.math.min
